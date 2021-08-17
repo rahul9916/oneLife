@@ -1,0 +1,46 @@
+package com.myspace.onelife;
+import com.myspace.onelife.slaObject;
+import com.myspace.onelife.slaResult;
+import java.util.ArrayList;
+import java.util.List;
+
+ruleflow-group "slaDRL"
+rule "RINOPR"
+when
+$slaObject:slaObject(slaObject.claimType=="Life" && slaObject.persona=="RINOPR")
+
+$a:  ArrayList()  
+              from collect( com.myspace.onelife.slaResult() from $slaObject.getSlaResult()) 
+then
+System.out.println("Frontend");
+$a.add(new com.myspace.onelife.slaResult("5m","taskOwner","Self Reminder",false,"1","operator"));
+System.out.println("Triggered"+$a);
+$slaObject.setSlaResult($a);
+$a.add(new com.myspace.onelife.slaResult("10m","taskOwnerRM","Escalation",false,"2","operator"));
+System.out.println("Triggered"+$a);
+$slaObject.setSlaResult($a);
+$a.add(new com.myspace.onelife.slaResult("10m","CLMMNG","Escalation",false,"3","role"));
+System.out.println("Triggered"+$a);
+$slaObject.setSlaResult($a);
+end;
+
+ruleflow-group "slaDRL"
+rule "UNDWRT"
+when
+$slaObject:slaObject(slaObject.claimType=="Life" && slaObject.persona=="UNDWRT")
+
+$a:  ArrayList()  
+              from collect( com.myspace.onelife.slaResult() from $slaObject.getSlaResult()) 
+then
+System.out.println("Frontend");
+$a.add(new com.myspace.onelife.slaResult("2m","taskOwner","Self Reminder",false,"1","operator"));
+System.out.println("Triggered"+$a);
+$slaObject.setSlaResult($a);
+$a.add(new com.myspace.onelife.slaResult("5m","taskOwnerRM","Escalation",false,"2","operator"));
+System.out.println("Triggered"+$a);
+$slaObject.setSlaResult($a);
+$a.add(new com.myspace.onelife.slaResult("5m","CLMMNG","Escalation",false,"3","role"));
+System.out.println("Triggered"+$a);
+$slaObject.setSlaResult($a);
+end;
+
